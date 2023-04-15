@@ -16,6 +16,7 @@ export class ApiGatewayService {
     let body = {"base":4, "exponent":5};
     const headers = new HttpHeaders({
       "Content-Type": ["application/json", "text/plain"],
+      "Access-Control-Allow-Origin": "*"
           });
 
     this.http.post<any>(this.baseUrl, body, {headers: headers}).subscribe(response=>{
