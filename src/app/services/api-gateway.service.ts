@@ -6,21 +6,22 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class ApiGatewayService {
 
-  private baseUrl = "https://7u4g4wqt95.execute-api.eu-central-1.amazonaws.com/mydev/mydemoresource";
+  private baseUrl = "/mydev/mydemoresource";
 
   constructor(private http: HttpClient) { }
 
   apiPost(): void {
 
     console.log("apiC called");
-    let raw = JSON.stringify({"base":4, "exponent":5});
+    let body = {"base":4, "exponent":5};
     const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-      'Access-Control-Allow-Origin': '*'
-    });
+      "Content-Type": ["application/json", "text/plain"],
+          });
 
-    this.http.post<any>(this.baseUrl, raw, {headers: headers, withCredentials:true}).subscribe(response=>{
-      console.log(response);
+    this.http.post<any>(this.baseUrl, body, {headers: headers}).subscribe(response=>{
+      console.log("response: ", response);
+    }, error => {
+      console.log("my error: ", error);
     });
   }
 }
